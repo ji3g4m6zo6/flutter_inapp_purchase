@@ -535,10 +535,11 @@ class AndroidInappPurchasePlugin internal constructor() : MethodCallHandler,
                     offerToken = selectedProductDetails.subscriptionOfferDetails?.get(offerTokenIndex)?.offerToken
                 }
                 if (offerToken == null) {
-                    offerToken = selectedProductDetails.subscriptionOfferDetails!![0].offerToken
+                    offerToken = selectedProductDetails.subscriptionOfferDetails?.get(0)?.offerToken
                 }
-
-                productDetailsParamsBuilder.setOfferToken(offerToken)
+                if (offerToken != null) {
+                    productDetailsParamsBuilder.setOfferToken(offerToken)
+                }
             }
 
             val productDetailsParamsList = listOf(productDetailsParamsBuilder.build())
